@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Google Pay mWeb Integration </title>
+    <script type="text/javascript" src="https://checkout.razorpay.com/v1/razorpay.js"></script>    
+</head>
+<style>
+
+button {
+    background-color: powderblue;
+}
+
+</style>
+<body>
+   <button id = "trigger-payment">Pay With Razorpay</button>
+
+</body>
+<script>
+ 
+ let rzp = new Razorpay({
+     key: 'rzp_live_b5bgP0Nk327lDg',
+     callback_url:'http://80.211.43.229/wh.php',
+     redirect: true
+ });
+
+ const paymentData = {
+         amount: 100,
+         method: 'upi',
+         contact: +917019284852,
+         email: 'h22tswift@gmail.com'
+     };
+ document.querySelector('#trigger-payment').addEventListener('click', (e) => {
+     
+     const success = () => {
+     alert('Tez Found');
+     rzp.createPayment(paymentData, {tez: true})
+      };
+
+     const error = () => {
+         alert('Tez Not Found!');
+         paymentData.vpa = 'h22tswift@okhdfcbank';
+         rzp.createPayment(paymentData);
+     };
+     rzp.isTezAvailable(success, error)
+     rzp.on('payment.success', (resp) => {
+              alert(resp.razorpay_payment_id);
+     });
+     rzp.on('payment.error', (resp) => {
+         alert(resp.error.description);
+     });
+
+    e.preventDefault(); 
+
+ });
+
+</script>
+
+</html>
