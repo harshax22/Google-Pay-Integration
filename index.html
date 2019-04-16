@@ -32,12 +32,12 @@ button {
  document.querySelector('#trigger-payment').addEventListener('click', (e) => {
      
      const success = () => {
-     alert('Tez Found');
+     alert('GPay Available');
      rzp.createPayment(paymentData, {tez: true})
       };
 
      const error = () => {
-         alert('Tez Not Found!');
+         alert('GPay Unavailable');
          paymentData.vpa = 'h22tswift@okhdfcbank';
          rzp.createPayment(paymentData);
      };
