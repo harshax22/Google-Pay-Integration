@@ -14,43 +14,33 @@ button {
 
 </style>
 <body>
-   <button id = "trigger-payment">Pay With Razorpay</button>
+   <button id ="trigger-payment">Pay With Razorpay</button>
 
 </body>
 <script>
  
  let rzp = new Razorpay({
-     key: ''
+     key: 'rzp_live_dEa4bewPWnahx4'
      });
     
  const paymentData = {
          amount: 100,
-         description: 'Test' + ' ' +  'Description',
+         description: 'Test Description',
          method: 'upi',
          contact: +917019284852,
          email: 'h22tswift@gmail.com'
      };
  document.querySelector('#trigger-payment').addEventListener('click', (e) => {
-     
-     const success = () => {
-     alert('GPay Available');
-     rzp.createPayment(paymentData, {tez: true})
-      };
 
-     const error = () => {
-         alert('GPay Unavailable');
-         paymentData.vpa = 'h22tswift@okhdfcbank';
-         rzp.createPayment(paymentData);
-     };
-     rzp.isTezAvailable(success, error)
-     rzp.on('payment.success', (resp) => {
-              alert(resp.razorpay_payment_id);
-     });
-     rzp.on('payment.error', (resp) => {
-         alert(resp.error.description);
-     });
-
-    e.preventDefault(); 
+     rzp.checkPaymentAdapter('gpay').then(() => {
+           alert('GPay Available');
+           rzp.createPayment(paymentData, {tez: true})
+     }).catch(() => {
+          alert('GPay Unavailable');
+          paymentData.vpa = 'h22tswift@okhdfcbank';
+          rzp.createPayment(paymentData);
+})
+  e.preventDefault(); 
 
  });
     
