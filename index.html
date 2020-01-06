@@ -34,7 +34,7 @@ button {
 
      rzp.checkPaymentAdapter('gpay').then(() => {
            alert('GPay Available');
-           rzp.createPayment(paymentData, {tez: true})
+           rzp.createPayment(paymentData, {gpay: true})
      }).catch(() => {
           alert('GPay Unavailable');
           paymentData.vpa = 'h22tswift@okhdfcbank';
