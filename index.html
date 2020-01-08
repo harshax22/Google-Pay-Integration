@@ -20,14 +20,14 @@ button {
 <script>
  
  let rzp = new Razorpay({
-     key: '' //Add your API Key here...
+     key: 'rzp_test_upYNslfmrDV2tg' //Add your API Key here...
      });
     
  const paymentData = {
          amount: 100,
          description: 'Test Description',
          method: 'upi',
-         contact: +917019284852,
+         contact: +919481358016,
          email: 'h22tswift@gmail.com'
      };
  document.querySelector('#trigger-payment').addEventListener('click', (e) => {
@@ -37,8 +37,8 @@ button {
            rzp.createPayment(paymentData, {gpay: true})
      }).catch(() => {
           alert('GPay Unavailable');
-          paymentData.vpa = 'h22tswift@okhdfcbank';
-          rzp.createPayment(paymentData);
+//           paymentData.vpa = 'h22tswift@okhdfcbank';
+//           rzp.createPayment(paymentData);
 })
   e.preventDefault(); 
 
